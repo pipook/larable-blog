@@ -21,7 +21,19 @@
                     </a>
                 </div>
                 <div>
-                    <a href="/" class="text-xs font-bold uppercase">Home Page</a>
+                    {{-- @guest
+                        <a href="/register" class="text-xs font-bold uppercase">Register</a>
+                    @endguest --}}
+                    @auth
+                        <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</span>
+                        <form action="/logout" method="POST" class="font-semibold inline px-6 text-blue-500 text-xs">
+                            @csrf
+                            <button type="submit">Log out</button>
+                        </form>
+                    @else
+                        <a href="/register" class="text-xs font-bold uppercase hover:underline">Register</a>
+                        <a href="/login" class="text-xs font-bold uppercase px-6 hover:underline">Log in</a>
+                    @endauth
                     <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-6">Subscribe for Updates</a>
                 </div>
             </nav>
