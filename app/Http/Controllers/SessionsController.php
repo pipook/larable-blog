@@ -20,7 +20,7 @@ class sessionsController extends Controller
             'email'=> ['required', 'email', 'max:255', Rule::exists('users', 'email')],
             'password'=> ['required', 'min:7', 'max:18']
         ]);
-        if(!auth()->attempt($attributes)){
+        if(! auth()->attempt($attributes)){
             throw ValidationException::withMessages([
                 'email'=> 'Your provided credentials could not be verified.'
             ]);
