@@ -46,4 +46,17 @@ Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
+Route::get('ping', function(){
+    $mailchimp = new \MailchimpMarketing\ApiClient();
 
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us14'
+    ]);
+
+    $response = $mailchimp->lists->addListMember("c12a52d3c1", [
+        "email_address" => "pipook@gmail.com",
+        "status" => "subscribed",
+    ]);
+    ddd($response);
+});
