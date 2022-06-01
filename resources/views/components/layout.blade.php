@@ -50,12 +50,18 @@
 
                 <div class="mt-10">
                     <div class="relative inline-block mx-auto bg-gray-200 rounded-full">
-                        <form method="POST" action="#" class="flex text-sm">
+                        <form method="POST" action="/newsletter" class="flex text-sm">
+                            @csrf
                             <div class="py-3 px-5 inline-flex items-center">
                                 <label for="email">
                                     <img src="/images/mailbox-icon.svg" alt="mailbox letter">
                                 </label>
-                                <input id="email" type="text" placeholder="Your email address" class="bg-transparent pl-4 focus-within:outline-none">
+                                <div>
+                                    <input name="email" type="text" placeholder="Your email address" class="bg-transparent pl-4 focus-within:outline-none">
+                                    @error('email')
+                                        <span class="text-xs text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <button type="submit" class="bg-blue-500 hover:bg-blue-600 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">Subscribe</button>
                         </form>
